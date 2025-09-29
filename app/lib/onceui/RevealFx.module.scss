@@ -1,0 +1,47 @@
+.revealFx {
+  /* SAFARI + cross-browser mask setup */
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 55%, rgba(0,0,0,0) 55.001%);
+  mask-image:         linear-gradient(90deg, #000 0, #000 55%, rgba(0,0,0,0) 55.001%);
+  -webkit-mask-size:  400% 100%;
+  mask-size:          400% 100%;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:        no-repeat;
+
+  transition-property: -webkit-mask-position, mask-position, filter, transform, opacity;
+  transition-timing-function: cubic-bezier(.2,.65,.2,1);
+  will-change: -webkit-mask-position, mask-position, filter;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+
+  &.hidden {
+    -webkit-mask-position: 100% 0;
+    mask-position:         100% 0;
+    filter: blur(8px);
+    transform: scale(1.02);
+  }
+
+  &.revealed {
+    -webkit-mask-position: 0 0;
+    mask-position:         0 0;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.revealFx,
+.hiddenNoMask,
+.revealedNoMask {
+  border-radius: var(--card-radius, 8px);
+  overflow: hidden;
+}
+
+.hiddenNoMask,
+.revealedNoMask {
+  transition-property: opacity, filter, transform;
+  transition-timing-function: cubic-bezier(.2,.65,.2,1);
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.hiddenNoMask   { filter: blur(8px);  opacity: 0; transform: scale(1.02); }
+.revealedNoMask { filter: blur(0);    opacity: 1; transform: scale(1);    }
