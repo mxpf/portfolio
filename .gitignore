@@ -1,7 +1,11 @@
-node_modules/
 .next/
+node_modules/
 .turbo/
 .vercel/
+.env
+.env.*
 *.log
-.env*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 .DS_Store
