@@ -34,7 +34,7 @@ export default function HomePage() {
   return (
     <main className="space-y-[var(--gutter)]">
       {/* HERO — reveal immediately (not on scroll) */}
-      <section className="frame pb-[var(--gutter)]">
+      <section className="frame mb-[var(--card-gap)] pb-0">
         <RevealFx
           className="rounded-[12px] overflow-hidden"
           translateY={1}
@@ -60,7 +60,7 @@ export default function HomePage() {
       </section>
 
       {/* LIST — reveal on scroll with small stagger */}
-      <section className="frame space-y-[var(--gutter)] pb-[var(--gutter)]">
+      <section className="frame space-y-[var(--card-gap)] pb-0">
         {projects.slice(1).map((p, i) => (
           <article key={p.title}>
             <RevealFx
@@ -103,12 +103,42 @@ export default function HomePage() {
 
 <div className="text-[clamp(22px,4vw,40px)] leading-tight font-medium flex items-end justify-between gap-4">
   <div>© Max Pfennighaus</div>
-  <a
-    href="mailto:hello@example.com"
-    className="underline underline-offset-4"
+<a
+  href="mailto:hello@example.com"
+  className="group relative inline-flex items-center"
+>
+  {/* label */}
+  <span
+    className="
+      inline-block
+      transition-[padding] duration-300
+      pr-0 group-hover:pr-[var(--arrow-w)]
+    "
   >
     Contact
-  </a>
+  </span>
+
+  {/* white arrow mask on the RIGHT */}
+  <span
+    aria-hidden="true"
+    className="
+      pointer-events-none
+      absolute right-0 top-1/2 -translate-y-1/2
+      h-[1em] w-[var(--arrow-w)]
+      overflow-hidden
+    "
+  >
+    {/* use the white left-pointing asset you added */}
+    <span
+      className="
+        block h-full w-[var(--arrow-w)]
+        bg-[url('/arrow-white.svg')] bg-no-repeat bg-right bg-contain
+        translate-x-full group-hover:translate-x-0
+        transition-transform duration-300
+      "
+    />
+  </span>
+</a>
 </div>
         </div>
       </footer>

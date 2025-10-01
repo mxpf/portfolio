@@ -4,6 +4,17 @@
 :root{
   --gutter: 40px;
   --header-h: 80px;
+  --cap-crop: 0.14em;
+  --card-gap: 80px;
+  --arrow-w: 1.8em;
+}
+
+.overlay-close {
+  position: fixed;
+  top: calc(var(--gutter) - var(--cap-crop));
+  right: var(--gutter);
+  left: auto !important;               /* <- beats any inline/class left */
+  transform: none;                     /* guard against transform shifts */
 }
 
 /* Base */
@@ -18,9 +29,32 @@ body {
 
 header * { line-height: 1; }
 
-/* Centering + fixed gutters */
-.frame {
-  padding-inline: var(--gutter);   /* ← restore the site gutters here */
+/* --- Header menu hover reveal --- */
+/* Use a safe fallback (3ch) if --enu-w isn't set yet */
+.menu-reveal { 
+  max-width: 0;
+  transition: max-width .5s cubic-bezier(.2,.65,.2,1);
+}
+.group:hover .menu-reveal,
+.group:focus-within .menu-reveal {
+  max-width: var(--enu-w, 3ch);
+}
+
+.menu-m {
+  transition: transform .5s cubic-bezier(.2,.65,.2,1);
+}
+.group:hover .menu-m,
+.group:focus-within .menu-m {
+  transform: translateX(calc(var(--enu-w, 3ch) * -1));
+}
+
+.menu-enu {
+  transform: translateX(var(--enu-w, 3ch));
+  transition: transform .5s cubic-bezier(.2,.65,.2,1);
+}
+.group:hover .menu-enu,
+.group:focus-within .menu-enu {
+  transform: translateX(0);
 }
 
 /* Horizontal page gutters (apply only where needed) */
@@ -47,11 +81,7 @@ header * { line-height: 1; }
 
 /* Card rhythm */
 .card { margin-block: calc(var(--gutter) * 0.75); }
-.card-title {
-  margin-top: var(--gutter);     /* 40px above */
-  margin-bottom: var(--gutter);  /* 40px below */
-  font-size: 40px;
-}
+
 
 /* footer full-viewport block */
 .full-viewport{
@@ -82,10 +112,49 @@ header * { line-height: 1; }
     opacity .6s var(--ease);
 }
 
+/* Card titles — match global type weight/size */
+.card-title{
+  margin-top: var(--gutter);          /* space from the image */
+  margin-bottom: 0;                   /* don't affect inter-card gap */
+  font-weight: 600;
+  line-height: 1;
+  font-size: clamp(26px, 5vw, 40px);
+}
 
+/* page gutters for content blocks */
+.frame {
+  padding-inline: var(--gutter);   /* 40px L/R at all widths */
+}
 
 /* ensure <Image fill> has a box to fill */
 .crop { position: relative; overflow: hidden; }
 
 /* failsafe: if hook never fires, reveal anyway */
 .force-visible { clip-path: inset(0 0 0 0) !important; opacity: 1 !important; filter: blur(0) !important; }
+
+/* --- Overlay Close hover reveal (mirrors header Menu) --- */
+.close-reveal{
+  max-width: 0;
+  transition: max-width .5s cubic-bezier(.2,.65,.2,1);
+}
+.group:hover .close-reveal,
+.group:focus-within .close-reveal{
+  max-width: var(--lose-w, 3ch);
+}
+
+.close-c{
+  transition: transform .5s cubic-bezier(.2,.65,.2,1);
+}
+.group:hover .close-c,
+.group:focus-within .close-c{
+  transform: translateX(calc(var(--lose-w, 3ch) * -1));
+}
+
+.close-lose{
+  transform: translateX(var(--lose-w, 3ch));
+  transition: transform .5s cubic-bezier(.2,.65,.2,1);
+}
+.group:hover .close-lose,
+.group:focus-within .close-lose{
+  transform: translateX(0);
+}

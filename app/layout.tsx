@@ -7,8 +7,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Max® — Portfolio",
-  description: "Minimal portfolio with fixed gutters and cinematic reveals.",
+  title: "Max Pfennighaus — Portfolio",
+  description: "Max's professional portfolio site, vibecoded with AI.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
